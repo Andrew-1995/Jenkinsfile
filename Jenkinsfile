@@ -16,9 +16,12 @@ pipeline {
                 expression {VM_TEST == 'true'}
             }
             steps {
-                git url: 'https://github.com/HoussemDellai/angular-app-kubernetes.git'
-                sh 'docker build -t 3226555/angular:angular-2 .'
-                kubernetesDeploy(configs:'deployment.azure.yaml', kubeconfigId:'Kubernetes_Credential',enableConfigSubstitution: true)
+                git url: 'https://github.com/Andrew-1995/spring-boot-mongo-docker-.git'
+                def mvnHOME = tool name: 'maven-3', type: 'maven'
+                def mvnCMD = "${mvnHOME}/bin/mvn"
+                sh "${mvnCMD} clean package"
+                sh 'docker build -t 3226555/angular:2020 .'
+                kubernetesDeploy(configs:'springBootMongo.yml',kubeconfigId:'Kubernetes_Credential',enableConfigSubstitution: true)
                 echo "Click here to Deploy on VM Test: ${params.VM_TEST}" 
             }
         }
