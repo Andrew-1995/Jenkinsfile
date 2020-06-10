@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Live') {
             when {
-                expression {VM_LIVE == true}
+                expression {VM_LIVE == 'true'}
             }
             steps {
                 echo "Click here to Deploy on VM Live: ${params.VM_LIVE}"
