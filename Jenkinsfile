@@ -11,7 +11,7 @@ pipeline {
 
     }
     stages {
-        stage('Example') {
+        stage('Test') {
             steps {
                 
 
@@ -21,10 +21,10 @@ pipeline {
 
                
             }
-            
-            steps{
-                echo "Click here to Deploy on VM LIVE: ${params.VM_LIVE}"
-                
+        }
+        stage('Live'){
+            stage {
+                                echo "Click here to Deploy on VM Live: ${params.VM_LIVE}"
             }
         }
     }
