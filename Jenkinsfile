@@ -16,6 +16,9 @@ pipeline {
                 expression {VM_TEST == 'true'}
             }
             steps {
+                git url: 'https://github.com/HoussemDellai/angular-app-kubernetes.git'
+                sh 'docker build -t 3226555/angular:angular-2 .'
+                kubernetesDeploy(configs:'deployment.azure.yaml', kubeconfigId:'Kubernetes_Credential',enableConfigSubstitution: true)
                 echo "Click here to Deploy on VM Test: ${params.VM_TEST}" 
             }
         }
