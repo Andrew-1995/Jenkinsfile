@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    parametes {
+        
+        choice(name:'door_choice',
+            choices: 'one\ntow\nthree\nfour',
+            description: 'What door you choose ?')
+        booleanParam(name: 'CAN_DANCE',
+            defaultValue: 'true',
+            description: 'Do the funky')
+    }
+    
+    stages{
+        stage('Example') {
+            steps {
+                echo 'Hello Andrew'
+                echo "Trying: ${params.door_choice}"
+                echo "We can dance: ${params.CAN_DANCE}"
+                echo "The DJ says: ${params.sTrAnGePaRaM}"
+            }
+        }
+    }
+}
