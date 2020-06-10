@@ -12,11 +12,17 @@ pipeline {
     }
     stages {
         stage('Test') {
+            when {
+                expression {VM_TEST == true}
+            }
             steps {
                 echo "Click here to Deploy on VM Test: ${params.VM_TEST}" 
             }
         }
         stage('Live') {
+            when {
+                expression {VM_LIVE == true}
+            }
             steps {
                 echo "Click here to Deploy on VM Live: ${params.VM_LIVE}"
             }
