@@ -17,9 +17,14 @@ pipeline {
 
                 echo "Click here to Deploy on VM Test: ${params.VM_TEST}"
 
-                echo "Click here to Deploy on VM LIVE: ${params.VM_LIVE}"
+                
 
                
+            }
+            
+            steps{
+                echo "Click here to Deploy on VM LIVE: ${params.VM_LIVE}"
+                
             }
         }
     }
