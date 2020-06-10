@@ -1,27 +1,25 @@
 pipeline {
     agent any
     parameters {
-        choice(name:'door_choice' , choices: 'one\ntow\nthree\nfour',description: 'what door do u choos?')
         
 
         
 
-        booleanParam(name: 'CAN_DANCE', defaultValue: true, description: 'Checkbox paramete')
+        booleanParam(name: 'VM_TEST', defaultValue: false, description: 'Checkbox paramete')
 
-        choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+        booleanParam(name: 'VM_LIVE', defaultValue: false, description: 'Checkbox paramete')
 
-        string(name: 'sTrAnGePaRaM', defaultValue: 'Dance!', description: 'Do the funky chicken')
     }
     stages {
         stage('Example') {
             steps {
-                echo ' Hello '
+                
 
-                echo "Trying: ${params.door_choice}"
+                echo "Click here to Deploy on VM Test: ${params.VM_TEST}"
 
-                echo "We can dance: ${params.CAN_DANCE}"
+                echo "Click here to Deploy on VM LIVE: ${params.VM_LIVE}"
 
-                echo "The DJ says: ${params.sTrAnGePaRaM}"
+               
             }
         }
     }
