@@ -17,6 +17,11 @@ pipeline {
             }
             steps {
                 git url: 'https://github.com/Andrew-1995/spring-boot-mongo-docker-.git'
+                def mvnHOME = tool name: 'maven-3', type: 'maven'
+                def mvnCMD = "${mvnHOME}/bin/mvn"
+                sh "${mvnCMD} clean package"
+                
+
 
                 echo "Click here to Deploy on VM Test: ${params.VM_TEST}" 
             }
