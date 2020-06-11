@@ -16,12 +16,13 @@ pipeline {
                 expression {VM_TEST == 'true'}
             }
             steps {
-                echo "Click here to Deploy on VM Test: ${params.VM_TEST}" 
-            }
-            steps {
                 git url: 'https://github.com/Andrew-1995/spring-boot-mongo-docker-.git'
+                steps {
+                    echo "Click here to Deploy on VM Test: ${params.VM_TEST}"
+                } 
             }
         }
+        
         stage('Live') {
             when {
                 expression {VM_LIVE == 'true'}
