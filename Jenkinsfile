@@ -11,26 +11,30 @@ pipeline {
 
     }
     stages {
-        stage('Test') {
-            when {
-                expression {VM_TEST == 'true'}
-            }
+        stage('CheckOut') {
             steps {
                 git url: 'https://github.com/Andrew-1995/spring-boot-mongo-docker-.git'
-                steps {
-                    def mvnHOME = tool name: 'maven-3', type: 'maven'
-                    def mvnCMD = "${mvnHOME}/bin/mvn"
-                    sh "${mvnCMD} clean package"
                 } 
             }
-        }
         
-        stage('Live') {
-            when {
-                expression {VM_LIVE == 'true'}
-            }
+        stage('Build Project MVN') {
             steps {
-                echo "Click here to Deploy on VM Live: ${params.VM_LIVE}"
+                def mvnHOME = tool name: 'maven-3', type: 'maven'
+                def mvnCMD = "${mvnHOME}/bin/mvn"
+                sh "${mvnCMD} clean package"
+            }
+        }
+        stage('Build image'){
+            steps{
+                sh 'docker build -t 3226555/angular:2020 .'
+            }
+        }
+        stage('Deploy to K8s'){
+            steps{
+                kubernetesDeploy(
+                configs:'springBootMongo.yml',
+                kubeconfigId:'Kubernetes_Credential',
+                enableConfigSubstitution: true)
             }
         }
     }
